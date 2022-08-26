@@ -3,5 +3,7 @@
   "block.forgethingy.test_ore_deepslate": "Deepslate Test Ore",
   "block.forgethingy.test_ore_end": "End Test Ore",
   "block.forgethingy.test_ore_nether": "Nether Test Ore",
+  "item.forgethingy.raw_test_ore": "Raw Test Ore",
+  "item.forgethingy.test_ingot": "Test Ingot",
   "itemGroup.forgethingy": "Forge Thingy"
 }

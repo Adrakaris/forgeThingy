@@ -1,7 +1,7 @@
 package com.bocbin.forgethingy.datagen;
 
 import com.bocbin.forgethingy.ForgeThingy;
-import com.bocbin.forgethingy.setup.Registration;
+import com.bocbin.forgethingy.setup.Reg;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.Tags;
@@ -17,23 +17,29 @@ public class BlockTags extends BlockTagsProvider {
 	protected void addTags() {
 		// to indicate mineable
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_PICKAXE)
-				.add(Registration.TEST_ORE.get())
-				.add(Registration.TEST_ORE_NETHER.get())
-				.add(Registration.TEST_ORE_END.get())
-				.add(Registration.TEST_ORE_DEEPSLATE.get());
+				.add(Reg.TEST_ORE.get())
+				.add(Reg.TEST_ORE_NETHER.get())
+				.add(Reg.TEST_ORE_END.get())
+				.add(Reg.TEST_ORE_DEEPSLATE.get());
 
 		tag(net.minecraft.tags.BlockTags.NEEDS_IRON_TOOL)
-				.add(Registration.TEST_ORE.get())
-				.add(Registration.TEST_ORE_NETHER.get())
-				.add(Registration.TEST_ORE_END.get())
-				.add(Registration.TEST_ORE_DEEPSLATE.get());
+				.add(Reg.TEST_ORE.get())
+				.add(Reg.TEST_ORE_NETHER.get())
+				.add(Reg.TEST_ORE_END.get())
+				.add(Reg.TEST_ORE_DEEPSLATE.get());
 
 		// forge specific tag
 		tag(Tags.Blocks.ORES)
-				.add(Registration.TEST_ORE.get())
-				.add(Registration.TEST_ORE_NETHER.get())
-				.add(Registration.TEST_ORE_END.get())
-				.add(Registration.TEST_ORE_DEEPSLATE.get());
+				.add(Reg.TEST_ORE.get())
+				.add(Reg.TEST_ORE_NETHER.get())
+				.add(Reg.TEST_ORE_END.get())
+				.add(Reg.TEST_ORE_DEEPSLATE.get());
+
+		tag(Reg.TAG_TEST_ORE)
+				.add(Reg.TEST_ORE.get())
+				.add(Reg.TEST_ORE_NETHER.get())
+				.add(Reg.TEST_ORE_END.get())
+				.add(Reg.TEST_ORE_DEEPSLATE.get());
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.bocbin.forgethingy.datagen;
 
 import com.bocbin.forgethingy.ForgeThingy;
-import com.bocbin.forgethingy.setup.Registration;
+import com.bocbin.forgethingy.setup.Reg;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -16,9 +16,9 @@ public class BlockStates extends BlockStateProvider {
 	protected void registerStatesAndModels() {
 		// generate simple block models
 		// will automatically use textures based on id of block if not specified
-		simpleBlock(Registration.TEST_ORE.get());
-		simpleBlock(Registration.TEST_ORE_DEEPSLATE.get());
-		simpleBlock(Registration.TEST_ORE_END.get());
-		simpleBlock(Registration.TEST_ORE_NETHER.get());
+		simpleBlock(Reg.TEST_ORE.get());
+		simpleBlock(Reg.TEST_ORE_DEEPSLATE.get());
+		simpleBlock(Reg.TEST_ORE_END.get());
+		simpleBlock(Reg.TEST_ORE_NETHER.get());
 	}
 }

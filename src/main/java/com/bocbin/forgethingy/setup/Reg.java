@@ -1,6 +1,9 @@
 package com.bocbin.forgethingy.setup;
 
 import com.bocbin.forgethingy.ForgeThingy;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -12,7 +15,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class Registration {
+public class Reg {
 
 	// define "deferred registries"
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ForgeThingy.MODID);
@@ -38,6 +41,7 @@ public class Registration {
 	// only one Item/Block class exists, actual instances in the world are like ItemStack or BlockState,
 	// which reference from the main block.
 
+	//region blocks and blockitems
 	public static final RegistryObject<Block> TEST_ORE = BLOCKS.register("test_ore", () -> new Block(ORE_PROPS));
 	public static final RegistryObject<Item> TEST_ORE_ITEM = fromBlock(TEST_ORE);
 	public static final RegistryObject<Block> TEST_ORE_DEEPSLATE = BLOCKS.register("test_ore_deepslate", () -> new Block(ORE_PROPS));
@@ -46,6 +50,17 @@ public class Registration {
 	public static final RegistryObject<Item> TEST_ORE_NETHER_ITEM = fromBlock(TEST_ORE_NETHER);
 	public static final RegistryObject<Block> TEST_ORE_END = BLOCKS.register("test_ore_end", () -> new Block(ORE_PROPS));
 	public static final RegistryObject<Item> TEST_ORE_END_ITEM = fromBlock(TEST_ORE_END);
+	//endregion
+
+	//region items
+	public static final RegistryObject<Item> RAW_TEST_ORE = ITEMS.register("raw_test_ore", () -> new Item(ITEM_PROPS));
+	public static final RegistryObject<Item> TEST_INGOT = ITEMS.register("test_ingot", () -> new Item(ITEM_PROPS));
+	//endregion
+
+	//region custom item tags
+	public static final TagKey<Block> TAG_TEST_ORE = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(ForgeThingy.MODID, "test_ore"));
+	public static final TagKey<Item> TAG_TEST_ORE_ITEM = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(ForgeThingy.MODID, "test_ore"));
+	//endregion
 
 	// to get a BlockItem from a block (i.e. register an item for a block)
 	// aiye java generics

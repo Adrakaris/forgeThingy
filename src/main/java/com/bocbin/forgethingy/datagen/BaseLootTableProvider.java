@@ -51,6 +51,7 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 
 	protected abstract void addTables();
 
+	/** Creates a standard loot table for a block entity to keep its internal contents */
 	protected LootTable.Builder createStandardTable(String name, Block block, BlockEntityType<?> type) {
 		// ??
 		LootPool.Builder builder = LootPool.lootPool()
@@ -69,6 +70,7 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 		return LootTable.lootTable().withPool(builder);
 	}
 
+	/** Lets a block drop itself */
 	protected LootTable.Builder createSimpleTable(String name, Block block) {
 		LootPool.Builder builder = LootPool.lootPool()
 				.name(name)
@@ -77,17 +79,55 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 		return LootTable.lootTable().withPool(builder);
 	}
 
-	protected LootTable.Builder createSilkTouchTable(String name, Block block, Item lootItem, float min, float max) {
+	/**
+	 * Supports both fortune and silk touch, for things like ores
+	 *
+	 * NOTE: even if you set min,max to one, the fortune roll seems to still be applied
+	 *
+	 * @param name maintain as name of mined block
+	 * @param block the base block to drop on silk touch
+	 * @param lootItem the item to drop
+	 * @param min base min drops
+	 * @param max base max drops
+	 * @param fortuneProb probability per roll of a level of fortune giving an extra drop - 1 is indentical to minecraft
+	 *                    behaviour for, say, redstone
+	 * @param extraRolls Extra rolls on top of the fortune level
+	 * @return loot table builder
+	 */
+	protected LootTable.Builder createSilkTouchTable(String name, Block block, Item lootItem, float min, float max, float fortuneProb, int extraRolls) {
 		LootPool.Builder builder = LootPool.lootPool()
 				.name(name)
-				.setRolls(ConstantValue.exactly(1))
+				.setRolls(ConstantValue.exactly(1))  // roll table once
 				.add(AlternativesEntry.alternatives(
 						LootItem.lootTableItem(block)
 								.when(MatchTool.toolMatches(ItemPredicate.Builder.item()
 										.hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))))),
+
 						LootItem.lootTableItem(lootItem)
 								.apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)))
-								.apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 1))
+//								.apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 1))
+								.apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, fortuneProb, extraRolls))  // probability, rounds to roll
+								.apply(ApplyExplosionDecay.explosionDecay())  // ?? ask mcJty
+				));
+
+		return LootTable.lootTable().withPool(builder);
+	}
+
+	// custom table for ore drops
+	protected LootTable.Builder createOreDropTable(String name, Block block, Item lootItem) {
+		LootPool.Builder builder = LootPool.lootPool()
+				.name(name)
+				.setRolls(ConstantValue.exactly(1))  // roll table once
+				.add(AlternativesEntry.alternatives(
+						LootItem.lootTableItem(block)
+								.when(MatchTool.toolMatches(ItemPredicate.Builder.item()
+										.hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))))),
+
+						LootItem.lootTableItem(lootItem)
+								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+								.apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+								// default ore bonus count - randomly 1x to 4x (1+3 for 3 fortune levels) of the setCounted value
+								// thus for normal behaviour the setCount can be left out and it'll default to 1.
 								.apply(ApplyExplosionDecay.explosionDecay())
 				));
 

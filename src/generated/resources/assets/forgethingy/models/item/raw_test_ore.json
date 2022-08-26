@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "forgethingy:item/raw_test_ore"
+  }
+}

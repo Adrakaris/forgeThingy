@@ -2,7 +2,7 @@ package com.bocbin.forgethingy.datagen;
 
 import com.bocbin.forgethingy.ForgeThingy;
 import com.bocbin.forgethingy.setup.ModSetup;
-import com.bocbin.forgethingy.setup.Registration;
+import com.bocbin.forgethingy.setup.Reg;
 import net.minecraft.data.DataGenerator;
 
 public class LanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
@@ -15,9 +15,14 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 	protected void addTranslations() {
 		add("itemGroup." + ModSetup.TAB_NAME, "Forge Thingy");
 
-		add(Registration.TEST_ORE.get(), "Test Ore");
-		add(Registration.TEST_ORE_DEEPSLATE.get(), "Deepslate Test Ore");
-		add(Registration.TEST_ORE_NETHER.get(), "Nether Test Ore");
-		add(Registration.TEST_ORE_END.get(), "End Test Ore");
+		// blocks
+		add(Reg.TEST_ORE.get(), "Test Ore");
+		add(Reg.TEST_ORE_DEEPSLATE.get(), "Deepslate Test Ore");
+		add(Reg.TEST_ORE_NETHER.get(), "Nether Test Ore");
+		add(Reg.TEST_ORE_END.get(), "End Test Ore");
+
+		// ingots
+		add(Reg.RAW_TEST_ORE.get(), "Raw Test Ore");
+		add(Reg.TEST_INGOT.get(), "Test Ingot");
 	}
 }

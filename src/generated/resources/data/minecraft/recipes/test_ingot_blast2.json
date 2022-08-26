@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "forgethingy:raw_test_ore"
+  },
+  "result": "forgethingy:test_ingot",
+  "experience": 1.2,
+  "cookingtime": 100
+}

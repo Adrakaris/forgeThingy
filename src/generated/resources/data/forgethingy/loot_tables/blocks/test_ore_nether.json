@@ -1,0 +1,63 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "name": "test_ore_nether",
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "forgethingy:test_ore_nether"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "min": 1.0,
+                    "max": 3.0
+                  },
+                  "add": false
+                },
+                {
+                  "function": "minecraft:apply_bonus",
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "parameters": {
+                    "extra": 0,
+                    "probability": 0.5
+                  }
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ],
+              "name": "forgethingy:raw_test_ore"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
