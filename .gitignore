@@ -1,0 +1,30 @@
+# Default ignored files
+/shelf/
+/.idea/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+.classpath
+.project
+.settings
+.DS_Store
+dependency-reduced-pom.xml
+target/
+*.iml
+*.ipr
+*.iws
+*.swp
+/*/src/main/java/META-INF
+.gitignore.swp
+docs/reference/src/main/docbook/en-US/version_info.xml
+.idea
+.forge_settings
+.factorypath
+atlassian-ide-plugin.xml
+.externalToolBuilders
+.gradle
+build
+forgelicense
