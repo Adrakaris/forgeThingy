@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "forgethingy:test_ore",
+    "forgethingy:test_ore_nether",
+    "forgethingy:test_ore_end",
+    "forgethingy:test_ore_deepslate"
+  ]
+}
