@@ -1,25 +1,36 @@
 package com.bocbin.forgethingy.setup;
 
 import com.bocbin.forgethingy.ForgeThingy;
+import com.bocbin.forgethingy.blocks.TestPowerGenerator;
+import com.bocbin.forgethingy.blocks.TestPowerGeneratorBE;
+import com.bocbin.forgethingy.blocks.TestPowerGeneratorContainer;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import static com.bocbin.forgethingy.ForgeThingy.MODID;
+
 public class Reg {
 
 	// define "deferred registries"
-	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ForgeThingy.MODID);
-	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ForgeThingy.MODID);
+	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
+	private static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MODID);
 
 	public static void init() {
 
@@ -30,6 +41,9 @@ public class Reg {
 
 		BLOCKS.register(bus);
 		ITEMS.register(bus);
+		BLOCK_ENTITIES.register(bus);
+		CONTAINERS.register(bus);
+
 	}
 
 	// defining common properties for blocks and items
@@ -50,6 +64,18 @@ public class Reg {
 	public static final RegistryObject<Item> TEST_ORE_NETHER_ITEM = fromBlock(TEST_ORE_NETHER);
 	public static final RegistryObject<Block> TEST_ORE_END = BLOCKS.register("test_ore_end", () -> new Block(ORE_PROPS));
 	public static final RegistryObject<Item> TEST_ORE_END_ITEM = fromBlock(TEST_ORE_END);
+
+	public static final RegistryObject<Block> TEST_POWERGENERATOR = BLOCKS.register("test_power_generator", TestPowerGenerator::new);
+	public static final RegistryObject<Item> TEST_POWERGENERATOR_ITEM = fromBlock(TEST_POWERGENERATOR);
+	public static final RegistryObject<BlockEntityType<TestPowerGeneratorBE>> TEST_POWERGENERATOR_BE = BLOCK_ENTITIES.register(
+			"test_power_generator",
+			() -> BlockEntityType.Builder.of(TestPowerGeneratorBE::new, TEST_POWERGENERATOR.get()).build(null)
+	);
+	public static final RegistryObject<MenuType<TestPowerGeneratorContainer>> TEST_POWERGENERATOR_CONTAINER = CONTAINERS.register(
+			"test_power_generator",
+			// data is a packet that comes from server
+			() -> IForgeMenuType.create((windowId, inv, data) -> new TestPowerGeneratorContainer(windowId, data.readBlockPos(), inv, inv.player))
+	);
 	//endregion
 
 	//region items
@@ -58,8 +84,8 @@ public class Reg {
 	//endregion
 
 	//region custom item tags
-	public static final TagKey<Block> TAG_TEST_ORE = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(ForgeThingy.MODID, "test_ore"));
-	public static final TagKey<Item> TAG_TEST_ORE_ITEM = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(ForgeThingy.MODID, "test_ore"));
+	public static final TagKey<Block> TAG_TEST_ORE = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(MODID, "test_ore"));
+	public static final TagKey<Item> TAG_TEST_ORE_ITEM = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(MODID, "test_ore"));
 	//endregion
 
 	// to get a BlockItem from a block (i.e. register an item for a block)

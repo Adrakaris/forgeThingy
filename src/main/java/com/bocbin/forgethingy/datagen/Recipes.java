@@ -1,11 +1,15 @@
 package com.bocbin.forgethingy.datagen;
 
 import com.bocbin.forgethingy.setup.Reg;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -22,7 +26,17 @@ public class Recipes extends RecipeProvider {
 	}
 
 	private void buildTableRecipes(Consumer<FinishedRecipe> consumer) {
-
+		ShapedRecipeBuilder.shaped(Reg.TEST_POWERGENERATOR.get())
+				.pattern("iii")
+				.pattern("ifi")
+				.pattern("RnR")
+				.define('i', Reg.TEST_INGOT.get())
+				.define('f', Blocks.FURNACE)
+				.define('R', Tags.Items.STORAGE_BLOCKS_REDSTONE)
+				.define('n', Tags.Items.INGOTS_IRON)
+				.group("forgethingy")
+				.unlockedBy("mysterious", InventoryChangeTrigger.TriggerInstance.hasItems(Reg.TEST_INGOT.get()))
+				.save(consumer);
 	}
 
 	private void buildSmeltingRecipes(Consumer<FinishedRecipe> consumer) {

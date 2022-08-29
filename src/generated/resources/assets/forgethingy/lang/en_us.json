@@ -3,7 +3,11 @@
   "block.forgethingy.test_ore_deepslate": "Deepslate Test Ore",
   "block.forgethingy.test_ore_end": "End Test Ore",
   "block.forgethingy.test_ore_nether": "Nether Test Ore",
+  "block.forgethingy.test_power_generator": "Test Power Generator",
   "item.forgethingy.raw_test_ore": "Raw Test Ore",
   "item.forgethingy.test_ingot": "Test Ingot",
-  "itemGroup.forgethingy": "Forge Thingy"
+  "itemGroup.forgethingy": "Forge Thingy",
+  "test_power_generator.message.1": "Solid fuel fired power generator",
+  "test_power_generator.message.2": "Generates %s RF per tick.",
+  "test_power_generator.tutorial.screen": "Test Power Generator"
 }

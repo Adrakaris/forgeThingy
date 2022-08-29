@@ -25,6 +25,8 @@ public class ItemModels extends ItemModelProvider {
 		withExistingParent(Reg.TEST_ORE_DEEPSLATE_ITEM.get().getRegistryName().getPath(), modLoc("block/test_ore_deepslate"));
 		withExistingParent(Reg.TEST_ORE_NETHER_ITEM.get().getRegistryName().getPath(), modLoc("block/test_ore_nether"));
 		withExistingParent(Reg.TEST_ORE_END_ITEM.get().getRegistryName().getPath(), modLoc("block/test_ore_end"));
+
+		withExistingParent(Reg.TEST_POWERGENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/test_power_generator/main"));
 		//endregion
 
 		//region registering item models

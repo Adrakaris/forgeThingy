@@ -33,5 +33,10 @@ public class LootTables extends BaseLootTableProvider {
 				createSilkTouchTable("test_ore_end", Reg.TEST_ORE_END.get(), Reg.RAW_TEST_ORE.get(),
 						1, 3, 0.5f, 0)
 		);
+
+		lootTables.put(
+				Reg.TEST_POWERGENERATOR.get(),
+				createStandardTable("test_power_generator", Reg.TEST_POWERGENERATOR.get(), Reg.TEST_POWERGENERATOR_BE.get())
+		);
 	}
 }
