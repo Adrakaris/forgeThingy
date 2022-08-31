@@ -3,6 +3,7 @@ package com.bocbin.forgethingy.client;
 import com.bocbin.forgethingy.ForgeThingy;
 import com.bocbin.forgethingy.blocks.TestPowerGenerator;
 import com.bocbin.forgethingy.blocks.TestPowerGeneratorContainer;
+import com.bocbin.forgethingy.utils.UtilFunctions;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -34,11 +35,25 @@ public class TestPowerGeneratorScreen extends AbstractContainerScreen<TestPowerG
 		int relX = (width - imageWidth) / 2;
 		int relY = (height - imageHeight) / 2;
 		this.blit(pPoseStack, relX, relY, 0, 0, imageWidth, imageHeight);
+
+		// render the fire flame
+		int counter = menu.getCounter();
+//		ForgeThingy.LOGGER.info("(dbg) gen counter at {}", counter);
+		if (counter > 0) {
+			int lastMax = menu.getLastMax();
+			int k = (int) Math.floor(UtilFunctions.scale(counter, 0f, lastMax, 0f, 14f));
+//			ForgeThingy.LOGGER.info("(dbg) Render -> counter {} lastMax {} k {}", counter, lastMax, k);
+			this.blit(pPoseStack, relX+56, relY+40-k, 176, 12-k, 14, k+1);
+//			this.blit(pPoseStack, relX+56, relY+28, 176, 0, 14, 12);
+		}
+
 	}
 
 	@Override
 	protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
 		// render energy, called later
 		drawString(pPoseStack, Minecraft.getInstance().font, "Energy: " + menu.getEnergy(), 10, 10, 0xffffff);
+//		drawString(pPoseStack, Minecraft.getInstance().font, "> Counter: " + menu.getCounter(), 10, 20, 0xffffff);
+//		drawString(pPoseStack, Minecraft.getInstance().font, "> LastMax: " + menu.getLastMax(), 10, 30, 0xffffff);
 	}
 }

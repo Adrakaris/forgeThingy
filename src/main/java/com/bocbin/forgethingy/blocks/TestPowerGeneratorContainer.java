@@ -18,12 +18,17 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 // tracks both the inventory of the block and the inventory of the player
 public class TestPowerGeneratorContainer extends AbstractContainerMenu {
 	// important since with a container it opens on both client side and server side
 	// container is bridge between client and server
 
-	private BlockEntity blockEntity;
+	private TestPowerGeneratorBE blockEntity;
 	private Player player;
 	private IItemHandler playerInventory;
 
@@ -33,8 +38,9 @@ public class TestPowerGeneratorContainer extends AbstractContainerMenu {
 		// but since this is vanilla we get an Inventory class
 
 		super(Reg.TEST_POWERGENERATOR_CONTAINER.get(), containerID);
-		blockEntity = player.getCommandSenderWorld().getBlockEntity(blockPos);
+		blockEntity = (TestPowerGeneratorBE) player.getCommandSenderWorld().getBlockEntity(blockPos);
 		this.player = player;
+
 		this.playerInventory = new InvWrapper(inv);  // this is the wrapper that turns the player inv into a forge capability
 
 		if (blockEntity != null) {
@@ -46,6 +52,8 @@ public class TestPowerGeneratorContainer extends AbstractContainerMenu {
 		// container comms btwn server and client, on client
 		// slots is how items is across, but we need energy too
 		trackPower();
+		trackIntField(this::getCounter, blockEntity::setCounter);
+		trackIntField(this::getLastMax, blockEntity::setLastMax);
 	}
 
 	// setup syncing of power from server to client
@@ -82,9 +90,40 @@ public class TestPowerGeneratorContainer extends AbstractContainerMenu {
 		});
 	}
 
+	/**
+	 * Sync any 32 bit int field via two data slots, and the relevant getters and setters
+	 * The getter should come from this own class. At least, I think that's how it works.
+	 *
+	 * @param getter Getter function: () -> getThing()  [or use ::]
+	 * @param setter Setter function: (v) -> setThing(v)
+	 */
+	public void trackIntField(Supplier<Integer> getter, Consumer<Integer> setter) {
+		addDataSlot(new DataSlot() {
+			@Override
+			public int get() {
+				return getter.get() & 0xffff;  // minor 16 bits
+			}
+
+			@Override
+			public void set(int pValue) {
+				setter.accept((getter.get() & 0xffff0000) + (pValue & 0xffff));
+			}
+		});
+	}
+
 	// client calls
 	public int getEnergy() {
 		return blockEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
+	}
+
+	public int getCounter() {
+		// note: does have to use data slots
+		//		but java functional arguments hehe
+		return blockEntity.getCounter();
+	}
+
+	public int getLastMax() {
+		return blockEntity.getLastMax();
 	}
 
 	// if player moves or block is broken whilst ui is broken

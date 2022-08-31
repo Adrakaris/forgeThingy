@@ -5,6 +5,7 @@ import com.bocbin.forgethingy.utils.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -39,8 +40,33 @@ public class TestPowerGeneratorBE extends BlockEntity {
 	// energy storage
 	private final CustomEnergyStorage energyStorage = createEnergy();
 	private final LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);
+//	private final ContainerData data = new ContainerData() {
+//		@Override
+//		public int get(int pIndex) {
+//			return switch (pIndex) {
+//				case 0 -> counter;
+//				case 1 -> lastMax;
+//				default -> 0;
+//			};
+//		}
+//
+//		@Override
+//		public void set(int pIndex, int pValue) {
+//			switch (pIndex) {
+//				case 0 -> counter = pValue;
+//				case 1 -> lastMax = pValue;
+//			}
+//		}
+//
+//		@Override
+//		public int getCount() {
+//			return 2;
+//		}
+//	};
 
 	private int counter;
+
+	private int lastMax;  // last maximum burn time
 
 	public TestPowerGeneratorBE(BlockPos pPos, BlockState pBlockState) {
 		super(Reg.TEST_POWERGENERATOR_BE.get(), pPos, pBlockState);
@@ -61,12 +87,13 @@ public class TestPowerGeneratorBE extends BlockEntity {
 			setChanged();
 		}
 
-		if (counter <= 0) {
+		// stop consuming if max energy
+		if (counter <= 0 && energyStorage.getEnergyStored() < energyStorage.getMaxEnergyStored()) {
 			ItemStack stack = itemHandler.getStackInSlot(0);
 			int burnTime = ForgeHooks.getBurnTime(stack, RecipeType.SMELTING);
 			if (burnTime > 0) {
 				itemHandler.extractItem(0, 1, false);
-				counter = burnTime;
+				counter = lastMax = burnTime;
 				setChanged();
 			}
 		}
@@ -131,6 +158,7 @@ public class TestPowerGeneratorBE extends BlockEntity {
 		}
 		if (pTag.contains("Info")) {
 			counter = pTag.getCompound("Info").getInt("Counter");
+			lastMax = pTag.getCompound("Info").getInt("LastMax");
 //			this.setChanged();
 		}
 		super.load(pTag);  // important
@@ -148,11 +176,29 @@ public class TestPowerGeneratorBE extends BlockEntity {
 		// assuming this is so we can do more in the tag
 		CompoundTag infoTag = new CompoundTag();
 		infoTag.putInt("Counter", counter);
+		infoTag.putInt("LastMax", lastMax);
 		pTag.put("Info", infoTag);
 //		this.setChanged();
 	}
 
 	//endregion
+
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+	public int getLastMax() {
+		return lastMax;
+	}
+
+	public void setLastMax(int lastMax) {
+		this.lastMax = lastMax;
+	}
 
 	@NotNull
 	@Override
