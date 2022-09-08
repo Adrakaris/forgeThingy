@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "forgethingy:block/ore_generator",
+      "x": 180
+    },
+    "facing=up": {
+      "model": "forgethingy:block/ore_generator"
+    },
+    "facing=north": {
+      "model": "forgethingy:block/ore_generator",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "forgethingy:block/ore_generator",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "forgethingy:block/ore_generator",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "forgethingy:block/ore_generator",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

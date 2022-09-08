@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -37,6 +38,21 @@ public class Recipes extends RecipeProvider {
 				.group("forgethingy")
 				.unlockedBy("mysterious", InventoryChangeTrigger.TriggerInstance.hasItems(Reg.TEST_INGOT.get()))
 				.save(consumer);
+
+		ShapedRecipeBuilder.shaped(Reg.ORE_GENERATOR.get())
+				.pattern(" i ")
+				.pattern("iDi")
+				.pattern("hic")
+				.define('i', Reg.TEST_INGOT.get())
+				.define('D', Tags.Items.STORAGE_BLOCKS_DIAMOND)
+				.define('h', Items.HOPPER)
+				.define('c', Items.COMPARATOR)
+				.unlockedBy("mysterious", InventoryChangeTrigger.TriggerInstance.hasItems(Reg.TEST_INGOT.get()))
+				.save(consumer);
+
+		// TODO: 55:05
+
+
 	}
 
 	private void buildSmeltingRecipes(Consumer<FinishedRecipe> consumer) {

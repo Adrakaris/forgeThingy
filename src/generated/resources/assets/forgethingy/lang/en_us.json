@@ -1,4 +1,5 @@
 {
+  "block.forgethingy.ore_generator": "Ore Generator",
   "block.forgethingy.test_ore": "Test Ore",
   "block.forgethingy.test_ore_deepslate": "Deepslate Test Ore",
   "block.forgethingy.test_ore_end": "End Test Ore",
@@ -7,6 +8,7 @@
   "item.forgethingy.raw_test_ore": "Raw Test Ore",
   "item.forgethingy.test_ingot": "Test Ingot",
   "itemGroup.forgethingy": "Forge Thingy",
+  "ore_generator.message": "Generates 1 ore from any 10 ingots",
   "test_power_generator.message.1": "Solid fuel fired power generator",
   "test_power_generator.message.2": "Generates %s RF per tick.",
   "test_power_generator.tutorial.screen": "Test Power Generator"

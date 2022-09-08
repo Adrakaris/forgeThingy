@@ -1,6 +1,7 @@
 package com.bocbin.forgethingy.datagen;
 
 import com.bocbin.forgethingy.ForgeThingy;
+import com.bocbin.forgethingy.client.OreGeneratorModelLoader;
 import com.bocbin.forgethingy.setup.Reg;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
@@ -8,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.CustomLoaderBuilder;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -26,6 +28,19 @@ public class BlockStates extends BlockStateProvider {
 		simpleBlock(Reg.TEST_ORE_END.get());
 		simpleBlock(Reg.TEST_ORE_NETHER.get());
 		registerPowerGenerator();
+		registerOregen();
+	}
+
+	// ore generator
+	private void registerOregen() {
+		BlockModelBuilder genModel = models().getBuilder(Reg.ORE_GENERATOR.get().getRegistryName().getPath())
+				.parent(models().getExistingFile(mcLoc("cube")))  // need standard cube as parent
+				.customLoader((blockModelBuilder, helper) -> new CustomLoaderBuilder<BlockModelBuilder>(
+						OreGeneratorModelLoader.OREGEN_LOADER, blockModelBuilder, helper
+				) {})
+				.end();
+		// make block directional
+		directionalBlock(Reg.ORE_GENERATOR.get(), genModel);
 	}
 
 	//region power generator

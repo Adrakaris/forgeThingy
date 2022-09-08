@@ -1,11 +1,15 @@
 package com.bocbin.forgethingy.setup;
 
 import com.bocbin.forgethingy.ForgeThingy;
+import com.bocbin.forgethingy.client.OreGeneratorModelLoader;
 import com.bocbin.forgethingy.client.TestPowerGeneratorScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -21,5 +25,11 @@ public class ClientSetup {
 			ItemBlockRenderTypes.setRenderLayer(Reg.TEST_POWERGENERATOR.get(), RenderType.translucent());
 		});
 
+	}
+
+	@SubscribeEvent
+	public static void onModelRegistry(ModelRegistryEvent event) {
+		// register our baked model
+		ModelLoaderRegistry.registerLoader(OreGeneratorModelLoader.OREGEN_LOADER, new OreGeneratorModelLoader());
 	}
 }

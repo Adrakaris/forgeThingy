@@ -38,5 +38,9 @@ public class LootTables extends BaseLootTableProvider {
 				Reg.TEST_POWERGENERATOR.get(),
 				createStandardTable("test_power_generator", Reg.TEST_POWERGENERATOR.get(), Reg.TEST_POWERGENERATOR_BE.get())
 		);
+		lootTables.put(
+				Reg.ORE_GENERATOR.get(),
+				createStandardTable("ore_generator", Reg.ORE_GENERATOR.get(), Reg.ORE_GENERATOR_BE.get())
+		);
 	}
 }

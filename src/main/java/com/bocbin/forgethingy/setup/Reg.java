@@ -1,9 +1,7 @@
 package com.bocbin.forgethingy.setup;
 
 import com.bocbin.forgethingy.ForgeThingy;
-import com.bocbin.forgethingy.blocks.TestPowerGenerator;
-import com.bocbin.forgethingy.blocks.TestPowerGeneratorBE;
-import com.bocbin.forgethingy.blocks.TestPowerGeneratorContainer;
+import com.bocbin.forgethingy.blocks.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -75,6 +73,14 @@ public class Reg {
 			"test_power_generator",
 			// data is a packet that comes from server
 			() -> IForgeMenuType.create((windowId, inv, data) -> new TestPowerGeneratorContainer(windowId, data.readBlockPos(), inv, inv.player))
+	);
+
+	// new "generator" block. It does not have a GUI, so we don't need a container class
+	public static final RegistryObject<Block> ORE_GENERATOR = BLOCKS.register("ore_generator", OreGenerator::new);
+	public static final RegistryObject<Item> ORE_GENERATOR_ITEM = fromBlock(ORE_GENERATOR);
+	public static final RegistryObject<BlockEntityType<OreGeneratorBE>> ORE_GENERATOR_BE = BLOCK_ENTITIES.register(
+			"ore_generator",
+			() -> BlockEntityType.Builder.of(OreGeneratorBE::new, ORE_GENERATOR.get()).build(null)
 	);
 	//endregion
 

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " i ",
+    "iDi",
+    "hic"
+  ],
+  "key": {
+    "i": {
+      "item": "forgethingy:test_ingot"
+    },
+    "D": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "h": {
+      "item": "minecraft:hopper"
+    },
+    "c": {
+      "item": "minecraft:comparator"
+    }
+  },
+  "result": {
+    "item": "forgethingy:ore_generator"
+  }
+}
