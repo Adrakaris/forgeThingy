@@ -49,10 +49,6 @@ public class Recipes extends RecipeProvider {
 				.define('c', Items.COMPARATOR)
 				.unlockedBy("mysterious", InventoryChangeTrigger.TriggerInstance.hasItems(Reg.TEST_INGOT.get()))
 				.save(consumer);
-
-		// TODO: 55:05
-
-
 	}
 
 	private void buildSmeltingRecipes(Consumer<FinishedRecipe> consumer) {
