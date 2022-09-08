@@ -2,12 +2,15 @@ package com.bocbin.forgethingy.setup;
 
 import com.bocbin.forgethingy.ForgeThingy;
 import com.bocbin.forgethingy.client.OreGeneratorModelLoader;
+import com.bocbin.forgethingy.client.TestPowerGeneratorRenderer;
 import com.bocbin.forgethingy.client.TestPowerGeneratorScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,13 +26,24 @@ public class ClientSetup {
 		event.enqueueWork(() -> {
 			MenuScreens.register(Reg.TEST_POWERGENERATOR_CONTAINER.get(), TestPowerGeneratorScreen::new);
 			ItemBlockRenderTypes.setRenderLayer(Reg.TEST_POWERGENERATOR.get(), RenderType.translucent());
+			TestPowerGeneratorRenderer.register();
 		});
 
 	}
 
+	// event for adding baked models
 	@SubscribeEvent
 	public static void onModelRegistry(ModelRegistryEvent event) {
 		// register our baked model
 		ModelLoaderRegistry.registerLoader(OreGeneratorModelLoader.OREGEN_LOADER, new OreGeneratorModelLoader());
+	}
+
+	// event for manually stitching textures onto the atlas
+	@SubscribeEvent
+	public static void onTextureStitch(TextureStitchEvent.Pre event) {
+		if (!event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
+			return;
+		}
+		event.addSprite(TestPowerGeneratorRenderer.HALO);
 	}
 }
