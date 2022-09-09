@@ -47,7 +47,7 @@ public class Reg {
 	// defining common properties for blocks and items
 	public static final Item.Properties ITEM_PROPS = new Item.Properties().tab(ModSetup.ITEM_GROUP);
 	// strength refers to pickaxe level
-	public static final BlockBehaviour.Properties ORE_PROPS = BlockBehaviour.Properties.of(Material.STONE).strength(2f);
+	public static final BlockBehaviour.Properties ORE_PROPS = BlockBehaviour.Properties.of(Material.STONE).strength(2f).requiresCorrectToolForDrops();
 
 	// defining blocks and items
 	// only one Item/Block class exists, actual instances in the world are like ItemStack or BlockState,

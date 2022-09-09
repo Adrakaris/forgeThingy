@@ -50,6 +50,7 @@ public class TestPowerGenerator extends Block implements EntityBlock {
 						.sound(SoundType.METAL)
 						.strength(2f)
 						.lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 14 : 0)
+						.requiresCorrectToolForDrops()
 				// blockstateproperties is vanilla, prefer to use these if possible but can create own
 		);
 	}
