@@ -299,7 +299,7 @@ public class OreGeneratorBE extends BlockEntity {
 	public void load(CompoundTag pTag) {
 		super.load(pTag);
 		if (pTag.contains("Inventory")) inputItems.deserializeNBT(pTag.getCompound("Inventory"));
-		if (pTag.contains("Energy")) energy.deserializeNBT(pTag.getCompound("Energy"));
+		if (pTag.contains("Energy")) energy.deserializeNBT(pTag.get("Energy"));  // Energy is a Get and NOT a compound
 		if (pTag.contains("Info")) {
 			loadClientData(pTag);
 			genCounter = pTag.getCompound("Info").getInt("Generating");
