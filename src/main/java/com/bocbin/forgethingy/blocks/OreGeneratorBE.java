@@ -2,6 +2,7 @@ package com.bocbin.forgethingy.blocks;
 
 import com.bocbin.forgethingy.setup.Reg;
 import com.bocbin.forgethingy.utils.CustomEnergyStorage;
+import com.bocbin.forgethingy.utils.Tools;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -179,7 +180,7 @@ public class OreGeneratorBE extends BlockEntity {
 					ItemStack remaining = ItemHandlerHelper.insertItem(outputItems,
 							new ItemStack(generatingBlock.getBlock().asItem()),
 							false);
-					spawnInWorld(remaining);  // no room in slot, chuck it onto ground
+					Tools.spawnInWorld(level, worldPosition, remaining);;  // no room in slot, chuck it onto ground
 				}
 			}
 		}
@@ -187,17 +188,18 @@ public class OreGeneratorBE extends BlockEntity {
 	}
 
 	// spawning item in world
-	private void spawnInWorld(ItemStack remaining) {
-		if (!remaining.isEmpty()) {
-			ItemEntity itemEntity = new ItemEntity(level,
-					worldPosition.getX(),
-					worldPosition.getY()+0.5,
-					worldPosition.getZ(), remaining);
-			itemEntity.setPickUpDelay(30);
-			itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().multiply(0,1,0));
-			level.addFreshEntity(itemEntity);
-		}
-	}
+	// superseded by method in Tools
+//	private void spawnInWorld(ItemStack remaining) {
+//		if (!remaining.isEmpty()) {
+//			ItemEntity itemEntity = new ItemEntity(level,
+//					worldPosition.getX(),
+//					worldPosition.getY()+0.5,
+//					worldPosition.getZ(), remaining);
+//			itemEntity.setPickUpDelay(30);
+//			itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().multiply(0,1,0));
+//			level.addFreshEntity(itemEntity);
+//		}
+//	}
 
 	//region getters setters
 	// called server side

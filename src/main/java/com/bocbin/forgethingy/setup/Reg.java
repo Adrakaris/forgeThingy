@@ -2,9 +2,12 @@ package com.bocbin.forgethingy.setup;
 
 import com.bocbin.forgethingy.ForgeThingy;
 import com.bocbin.forgethingy.blocks.*;
+import com.bocbin.forgethingy.entities.ThiefEntity;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -13,6 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -29,6 +33,7 @@ public class Reg {
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
 	private static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MODID);
+	private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MODID);
 
 	public static void init() {
 
@@ -41,7 +46,7 @@ public class Reg {
 		ITEMS.register(bus);
 		BLOCK_ENTITIES.register(bus);
 		CONTAINERS.register(bus);
-
+		ENTITIES.register(bus);
 	}
 
 	// defining common properties for blocks and items
@@ -92,6 +97,18 @@ public class Reg {
 	//region custom item tags
 	public static final TagKey<Block> TAG_TEST_ORE = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(MODID, "test_ore"));
 	public static final TagKey<Item> TAG_TEST_ORE_ITEM = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(MODID, "test_ore"));
+	//endregion
+
+	//region entities
+	public static final RegistryObject<EntityType<ThiefEntity>> THIEF = ENTITIES.register(
+			"thief", () -> EntityType.Builder.of(ThiefEntity::new, MobCategory.CREATURE)
+					.sized(0.6f, 1.95f)
+					.clientTrackingRange(8)
+					.setShouldReceiveVelocityUpdates(false)  // 不知其用
+					.build("thief"));
+	public static final RegistryObject<Item> THIEF_SPAWN_EGG = ITEMS.register(
+			"thief", () -> new ForgeSpawnEggItem(THIEF, 0xff0000, 0x00ff00, ITEM_PROPS)
+	);
 	//endregion
 
 	// to get a BlockItem from a block (i.e. register an item for a block)

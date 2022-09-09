@@ -5,10 +5,12 @@
   "block.forgethingy.test_ore_end": "End Test Ore",
   "block.forgethingy.test_ore_nether": "Nether Test Ore",
   "block.forgethingy.test_power_generator": "Test Power Generator",
+  "entity.forgethingy.thief": "Thief",
   "item.forgethingy.raw_test_ore": "Raw Test Ore",
   "item.forgethingy.test_ingot": "Test Ingot",
+  "item.forgethingy.thief": "Spawn Thief",
   "itemGroup.forgethingy": "Forge Thingy",
-  "ore_generator.message": "Generates 1 ore from any 10 ingots",
+  "ore_generator.message": "Generates 1 ore from any 8 ingots",
   "test_power_generator.message.1": "Solid fuel fired power generator",
   "test_power_generator.message.2": "Generates %s RF per tick.",
   "test_power_generator.tutorial.screen": "Test Power Generator"

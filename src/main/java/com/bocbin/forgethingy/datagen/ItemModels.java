@@ -40,5 +40,8 @@ public class ItemModels extends ItemModelProvider {
 				mcLoc("item/generated"), "layer0", modLoc("item/test_ingot"));
 
 		//endregion
+
+		// registering item models but with parent
+		withExistingParent(Reg.THIEF_SPAWN_EGG.get().getRegistryName().getPath(), mcLoc("item/template_spawn_egg"));
 	}
 }

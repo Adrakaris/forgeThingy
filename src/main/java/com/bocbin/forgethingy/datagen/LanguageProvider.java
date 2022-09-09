@@ -33,5 +33,9 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 		// ingots
 		add(Reg.RAW_TEST_ORE.get(), "Raw Test Ore");
 		add(Reg.TEST_INGOT.get(), "Test Ingot");
+
+		// etc
+		add(Reg.THIEF_SPAWN_EGG.get(), "Spawn Thief");
+		add(Reg.THIEF.get(), "Thief");
 	}
 }

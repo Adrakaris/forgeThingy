@@ -4,11 +4,14 @@ import com.bocbin.forgethingy.ForgeThingy;
 import com.bocbin.forgethingy.client.OreGeneratorModelLoader;
 import com.bocbin.forgethingy.client.TestPowerGeneratorRenderer;
 import com.bocbin.forgethingy.client.TestPowerGeneratorScreen;
+import com.bocbin.forgethingy.entities.ThiefModel;
+import com.bocbin.forgethingy.entities.ThiefRenderer;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -16,6 +19,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+
+// model of the entity
 @Mod.EventBusSubscriber(modid = ForgeThingy.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
 
@@ -45,5 +50,17 @@ public class ClientSetup {
 			return;
 		}
 		event.addSprite(TestPowerGeneratorRenderer.HALO);
+	}
+
+	// event for registering model layers
+	@SubscribeEvent
+	public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(ThiefModel.THIEF_LAYER, ThiefModel::createBodyLayer);
+	}
+
+	// event for registering entity model loaders
+	@SubscribeEvent
+	public static void onRegisterRenderer(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerEntityRenderer(Reg.THIEF.get(), ThiefRenderer::new);
 	}
 }

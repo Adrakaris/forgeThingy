@@ -1,6 +1,5 @@
 package com.bocbin.forgethingy.blocks;
 
-import com.google.common.collect.ImmutableMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,7 +32,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Function;
 
 public class OreGenerator extends Block implements EntityBlock {
 
