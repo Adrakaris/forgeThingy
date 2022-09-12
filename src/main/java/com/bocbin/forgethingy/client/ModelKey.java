@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 /**
  * A key used to identify a set of baked quads for the baked model
+ * (Records are a neat feature of (iirc) 14)
  */
 public record ModelKey(
 		boolean generating,
