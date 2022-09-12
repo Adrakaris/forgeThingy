@@ -13,9 +13,11 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -53,6 +55,7 @@ public class Reg {
 	public static final Item.Properties ITEM_PROPS = new Item.Properties().tab(ModSetup.ITEM_GROUP);
 	// strength refers to pickaxe level
 	public static final BlockBehaviour.Properties ORE_PROPS = BlockBehaviour.Properties.of(Material.STONE).strength(2f).requiresCorrectToolForDrops();
+	public static final BlockBehaviour.Properties METAL_PROPS = BlockBehaviour.Properties.of(Material.METAL, MaterialColor.METAL).strength(2f).requiresCorrectToolForDrops().sound(SoundType.METAL);
 
 	// defining blocks and items
 	// only one Item/Block class exists, actual instances in the world are like ItemStack or BlockState,
@@ -67,6 +70,8 @@ public class Reg {
 	public static final RegistryObject<Item> TEST_ORE_NETHER_ITEM = fromBlock(TEST_ORE_NETHER);
 	public static final RegistryObject<Block> TEST_ORE_END = BLOCKS.register("test_ore_end", () -> new Block(ORE_PROPS));
 	public static final RegistryObject<Item> TEST_ORE_END_ITEM = fromBlock(TEST_ORE_END);
+	public static final RegistryObject<Block> TEST_INGOT_BLOCK = BLOCKS.register("test_ingot_block", () -> new Block(METAL_PROPS));
+	public static final RegistryObject<Item> TEST_INGOT_BLOCK_ITEM = fromBlock(TEST_INGOT_BLOCK);
 
 	public static final RegistryObject<Block> TEST_POWERGENERATOR = BLOCKS.register("test_power_generator", TestPowerGenerator::new);
 	public static final RegistryObject<Item> TEST_POWERGENERATOR_ITEM = fromBlock(TEST_POWERGENERATOR);

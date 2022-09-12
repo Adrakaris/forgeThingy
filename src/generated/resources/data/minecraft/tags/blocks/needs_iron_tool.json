@@ -6,6 +6,7 @@
     "forgethingy:test_ore_end",
     "forgethingy:test_ore_deepslate",
     "forgethingy:test_power_generator",
-    "forgethingy:ore_generator"
+    "forgethingy:ore_generator",
+    "forgethingy:test_ingot_block"
   ]
 }

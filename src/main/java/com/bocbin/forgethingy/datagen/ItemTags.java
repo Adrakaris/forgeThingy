@@ -32,6 +32,9 @@ public class ItemTags extends ItemTagsProvider {
 
 		tag(Tags.Items.RAW_MATERIALS)  // raw ores and stuff
 				.add(Reg.RAW_TEST_ORE.get());
+
+		tag(Tags.Items.STORAGE_BLOCKS)
+				.add(Reg.TEST_INGOT_BLOCK_ITEM.get());
 	}
 
 	@Override

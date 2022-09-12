@@ -3,10 +3,7 @@ package com.bocbin.forgethingy.datagen;
 import com.bocbin.forgethingy.setup.Reg;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -47,6 +44,11 @@ public class Recipes extends RecipeProvider {
 				.define('D', Tags.Items.STORAGE_BLOCKS_DIAMOND)
 				.define('h', Items.HOPPER)
 				.define('c', Items.COMPARATOR)
+				.unlockedBy("mysterious", InventoryChangeTrigger.TriggerInstance.hasItems(Reg.TEST_INGOT.get()))
+				.save(consumer);
+
+		ShapelessRecipeBuilder.shapeless(Reg.TEST_INGOT_BLOCK.get())
+				.requires(Reg.TEST_INGOT.get(), 9)
 				.unlockedBy("mysterious", InventoryChangeTrigger.TriggerInstance.hasItems(Reg.TEST_INGOT.get()))
 				.save(consumer);
 	}

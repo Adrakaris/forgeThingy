@@ -20,6 +20,8 @@ public class ForgeThingy {
 
 	public ForgeThingy() {
 
+		// setup ModSetup (for adding features
+		ModSetup.setup();
 		// registering the "deferred registery"
 		Reg.init();
 

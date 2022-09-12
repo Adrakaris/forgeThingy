@@ -7,10 +7,10 @@ import com.bocbin.forgethingy.setup.ModSetup;
 import com.bocbin.forgethingy.setup.Reg;
 import net.minecraft.data.DataGenerator;
 
-public class LanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
+public class EnglishLanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
 
-	public LanguageProvider(DataGenerator gen, String locale) {
-		super(gen, ForgeThingy.MODID, locale);
+	public EnglishLanguageProvider(DataGenerator gen) {
+		super(gen, ForgeThingy.MODID, "en_us");
 	}
 
 	@Override
@@ -29,6 +29,8 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 		add(Reg.TEST_ORE_DEEPSLATE.get(), "Deepslate Test Ore");
 		add(Reg.TEST_ORE_NETHER.get(), "Nether Test Ore");
 		add(Reg.TEST_ORE_END.get(), "End Test Ore");
+
+		add(Reg.TEST_INGOT_BLOCK.get(), "Test Ingot Block");
 
 		// ingots
 		add(Reg.RAW_TEST_ORE.get(), "Raw Test Ore");

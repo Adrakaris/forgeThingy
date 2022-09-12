@@ -22,7 +22,8 @@ public class BlockTags extends BlockTagsProvider {
 				.add(Reg.TEST_ORE_END.get())
 				.add(Reg.TEST_ORE_DEEPSLATE.get())
 				.add(Reg.TEST_POWERGENERATOR.get())
-				.add(Reg.ORE_GENERATOR.get());
+				.add(Reg.ORE_GENERATOR.get())
+				.add(Reg.TEST_INGOT_BLOCK.get());
 
 		tag(net.minecraft.tags.BlockTags.NEEDS_IRON_TOOL)
 				.add(Reg.TEST_ORE.get())
@@ -30,7 +31,8 @@ public class BlockTags extends BlockTagsProvider {
 				.add(Reg.TEST_ORE_END.get())
 				.add(Reg.TEST_ORE_DEEPSLATE.get())
 				.add(Reg.TEST_POWERGENERATOR.get())
-				.add(Reg.ORE_GENERATOR.get());
+				.add(Reg.ORE_GENERATOR.get())
+				.add(Reg.TEST_INGOT_BLOCK.get());
 
 		// forge specific tag
 		tag(Tags.Blocks.ORES)
@@ -44,6 +46,9 @@ public class BlockTags extends BlockTagsProvider {
 				.add(Reg.TEST_ORE_NETHER.get())
 				.add(Reg.TEST_ORE_END.get())
 				.add(Reg.TEST_ORE_DEEPSLATE.get());
+
+		tag(Tags.Blocks.STORAGE_BLOCKS)
+				.add(Reg.TEST_INGOT_BLOCK.get());
 	}
 
 	@Override

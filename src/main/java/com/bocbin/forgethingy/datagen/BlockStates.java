@@ -27,6 +27,7 @@ public class BlockStates extends BlockStateProvider {
 		simpleBlock(Reg.TEST_ORE_DEEPSLATE.get());
 		simpleBlock(Reg.TEST_ORE_END.get());
 		simpleBlock(Reg.TEST_ORE_NETHER.get());
+		simpleBlock(Reg.TEST_INGOT_BLOCK.get());
 		registerPowerGenerator();
 		registerOregen();
 	}

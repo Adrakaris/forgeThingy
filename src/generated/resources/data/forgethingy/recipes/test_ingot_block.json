@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forgethingy:test_ingot"
+    },
+    {
+      "item": "forgethingy:test_ingot"
+    },
+    {
+      "item": "forgethingy:test_ingot"
+    },
+    {
+      "item": "forgethingy:test_ingot"
+    },
+    {
+      "item": "forgethingy:test_ingot"
+    },
+    {
+      "item": "forgethingy:test_ingot"
+    },
+    {
+      "item": "forgethingy:test_ingot"
+    },
+    {
+      "item": "forgethingy:test_ingot"
+    },
+    {
+      "item": "forgethingy:test_ingot"
+    }
+  ],
+  "result": {
+    "item": "forgethingy:test_ingot_block"
+  }
+}
