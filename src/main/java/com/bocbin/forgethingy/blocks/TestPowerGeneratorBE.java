@@ -5,7 +5,6 @@ import com.bocbin.forgethingy.utils.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -26,10 +25,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestPowerGeneratorBE extends BlockEntity {
-
-	public static final int CAPACITY = 100_000;
-	public static final int GEN_RATE = 80;
-	public static final int TRANSFER_RATE = 240;
 
 	// using "Capabilities" in be -- forge only
 	// want interoperability between mods, which is what forge does
@@ -82,7 +77,7 @@ public class TestPowerGeneratorBE extends BlockEntity {
 	public void tickServer() {
 		// all the logic
 		if (counter > 0) {
-			energyStorage.addEnergy(GEN_RATE);
+			energyStorage.addEnergy(TestPowerGeneratorConfig.GEN_RATE.get());
 			counter--;
 			setChanged();
 		}
@@ -122,7 +117,7 @@ public class TestPowerGeneratorBE extends BlockEntity {
 							.map(otherHandler -> {
 								if (otherHandler.canReceive()) {
 									// how much we actually sent
-									int received = otherHandler.receiveEnergy(Math.min(storedEnergy.get(), TRANSFER_RATE), false);
+									int received = otherHandler.receiveEnergy(Math.min(storedEnergy.get(), TestPowerGeneratorConfig.TRANSFER_RATE.get()), false);
 									// change our local atomic stored energy
 									storedEnergy.addAndGet(-received);
 									energyStorage.removeEnergy(received);
@@ -241,7 +236,7 @@ public class TestPowerGeneratorBE extends BlockEntity {
 	}
 
 	public CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(CAPACITY, TRANSFER_RATE) {
+		return new CustomEnergyStorage(TestPowerGeneratorConfig.CAPACITY.get(), TestPowerGeneratorConfig.TRANSFER_RATE.get()) {
 			@Override
 			protected void onEnergyChanged() {
 				setChanged();

@@ -67,7 +67,7 @@ public class TestPowerGenerator extends Block implements EntityBlock {
 	@Override
 	public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
 		pTooltip.add(new TranslatableComponent(POWERGEN_MESSAGE_1).withStyle(ChatFormatting.GRAY));
-		pTooltip.add(new TranslatableComponent(POWERGEN_MESSAGE_2, Integer.toString(TestPowerGeneratorBE.GEN_RATE)).withStyle(ChatFormatting.GRAY));
+		pTooltip.add(new TranslatableComponent(POWERGEN_MESSAGE_2, Integer.toString(TestPowerGeneratorConfig.GEN_RATE.get())).withStyle(ChatFormatting.GRAY));
 	}
 
 	// to make block support blockstateproperties

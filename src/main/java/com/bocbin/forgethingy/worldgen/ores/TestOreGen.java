@@ -19,15 +19,6 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 public class TestOreGen {
 
-	public static final int OVERWORLD_VEINSIZE = 5;
-	public static final int OVERWORLD_AMOUNT = 3;
-	public static final int DEEPSLATE_VEINSIZE = 6;
-	public static final int DEEPSLATE_AMOUNT = 3;
-	public static final int NETHER_VEINSIZE = 5;
-	public static final int NETHER_AMOUNT = 3;
-	public static final int END_VEINSIZE = 10;
-	public static final int END_AMOUNT = 4;
-
 	public static final RuleTest IN_ENDSTONE = new TagMatchTest(Tags.Blocks.END_STONES);
 
 	public static Holder<PlacedFeature> OVERWORLD_GEN;
@@ -45,39 +36,39 @@ public class TestOreGen {
 		OreConfiguration overworldConfig = new OreConfiguration(
 				OreFeatures.STONE_ORE_REPLACEABLES,  // ruletest -- where the ore will generate
 				Reg.TEST_ORE.get().defaultBlockState(),  // block
-				OVERWORLD_VEINSIZE  // size
+				TestOreConfig.OVERWORLD_VEINSIZE.get()  // size
 				);
 		OVERWORLD_GEN = registerPlacedFeature(
 				"test_ore",
 				new ConfiguredFeature<>(Feature.ORE, overworldConfig),  // placement modifiers have types - can only use each type once probably
-				CountPlacement.of(OVERWORLD_AMOUNT),  // number of tries
+				CountPlacement.of(TestOreConfig.OVERWORLD_AMOUNT.get()),  // number of tries
 				InSquarePlacement.spread(),  // spread generation around
 				BiomeFilter.biome(),  // need - checks if biome supports feature
 				HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(40))  // where to generate
 		);
 
-		OreConfiguration deepslateConfig = new OreConfiguration(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, Reg.TEST_ORE_DEEPSLATE.get().defaultBlockState(), DEEPSLATE_VEINSIZE);
+		OreConfiguration deepslateConfig = new OreConfiguration(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, Reg.TEST_ORE_DEEPSLATE.get().defaultBlockState(), TestOreConfig.DEEPSLATE_VEINSIZE.get());
 		DEEPSLATE_GEN = registerPlacedFeature(
 				"test_ore_deepslate",
 				new ConfiguredFeature<>(Feature.ORE, deepslateConfig),
-				CountPlacement.of(DEEPSLATE_AMOUNT),
+				CountPlacement.of(TestOreConfig.DEEPSLATE_AMOUNT.get()),
 				InSquarePlacement.spread(),
 				BiomeFilter.biome(),
 				HeightRangePlacement.uniform(VerticalAnchor.BOTTOM, VerticalAnchor.aboveBottom(64))
 		);
 
-		OreConfiguration netherConfig = new OreConfiguration(OreFeatures.NETHER_ORE_REPLACEABLES, Reg.TEST_ORE_NETHER.get().defaultBlockState(), NETHER_VEINSIZE);
+		OreConfiguration netherConfig = new OreConfiguration(OreFeatures.NETHER_ORE_REPLACEABLES, Reg.TEST_ORE_NETHER.get().defaultBlockState(), TestOreConfig.NETHER_VEINSIZE.get());
 		NETHER_GEN = registerPlacedFeature("test_ore_nether",
 				new ConfiguredFeature<>(Feature.ORE, netherConfig),
-				CountPlacement.of(NETHER_AMOUNT),
+				CountPlacement.of(TestOreConfig.NETHER_AMOUNT.get()),
 				InSquarePlacement.spread(),
 				BiomeFilter.biome(),
 				HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(98)));
 
-		OreConfiguration endConfig = new OreConfiguration(IN_ENDSTONE, Reg.TEST_ORE_END.get().defaultBlockState(), END_VEINSIZE);
+		OreConfiguration endConfig = new OreConfiguration(IN_ENDSTONE, Reg.TEST_ORE_END.get().defaultBlockState(), TestOreConfig.END_VEINSIZE.get());
 		END_GEN = registerPlacedFeature("test_ore_end",
 				new ConfiguredFeature<>(Feature.ORE, endConfig),
-				CountPlacement.of(END_AMOUNT),
+				CountPlacement.of(TestOreConfig.END_AMOUNT.get()),
 				InSquarePlacement.spread(),
 				BiomeFilter.biome(),
 				HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(100)));

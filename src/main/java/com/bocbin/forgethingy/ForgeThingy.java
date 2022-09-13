@@ -1,6 +1,7 @@
 package com.bocbin.forgethingy;
 
 import com.bocbin.forgethingy.setup.ClientSetup;
+import com.bocbin.forgethingy.setup.Config;
 import com.bocbin.forgethingy.setup.ModSetup;
 import com.bocbin.forgethingy.setup.Reg;
 import com.mojang.logging.LogUtils;
@@ -24,6 +25,9 @@ public class ForgeThingy {
 		ModSetup.setup();
 		// registering the "deferred registery"
 		Reg.init();
+		// registration of blocks happen before configuration, but the order in public ForgeThingy doesn't matter
+		// but we cannot do registration based on configuration	(i.e. register a block based on config - just datapack it out)
+		Config.register();
 
 		// register mod loading events
 		IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();

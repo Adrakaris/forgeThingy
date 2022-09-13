@@ -2,6 +2,7 @@ package com.bocbin.forgethingy.client;
 
 import com.bocbin.forgethingy.ForgeThingy;
 import com.bocbin.forgethingy.blocks.TestPowerGeneratorBE;
+import com.bocbin.forgethingy.blocks.TestPowerGeneratorConfig;
 import com.bocbin.forgethingy.setup.Reg;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -46,7 +47,8 @@ public class TestPowerGeneratorRenderer implements BlockEntityRenderer<TestPower
 		if (s > 0.5f) {
 			s = 1.0f - s;
 		}
-		float scale = 0.1f + s * 0.3f;
+		// Double -> double -> float  because java
+		float scale = 0.1f + s * (float)(double)(TestPowerGeneratorConfig.STAR_SCALE.get());
 
 		// get sprite
 		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(HALO);

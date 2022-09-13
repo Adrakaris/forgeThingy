@@ -60,14 +60,8 @@ public class OreGeneratorBE extends BlockEntity {
 	public static final ModelProperty<Boolean> COLLECTING = new ModelProperty<>();
 	public static final ModelProperty<Boolean> WORKING = new ModelProperty<>();
 
-	// static fields, could be put in config files
-	public static final int COLLECT_DELAY = 10;
-	public static final int INGOTS_PER_ORE = 8;
 	public static final int INPUT_SLOTS = 5;
 	public static final int OUTPUT_SLOTS = 1;
-	public static final int ENERGY_CAP = 100_000;
-	public static final int ENERGY_RECEIVE = 1000;
-	public static final int ENERGY_USE = 500;
 
 	// actual relevant changing fields
 	private boolean generating = false;  // mode
@@ -108,7 +102,7 @@ public class OreGeneratorBE extends BlockEntity {
 		if (collecting) {
 			collectingTicker--;  // don't want to collect items every tick - delay of 10 ticks
 			if (collectingTicker <= 0) {
-				collectingTicker = COLLECT_DELAY;
+				collectingTicker = OreGeneratorConfig.COLLECT_DELAY.get();
 				collectItems();
 			}
 		}
@@ -157,7 +151,7 @@ public class OreGeneratorBE extends BlockEntity {
 			return false;
 		}
 		// not enough energy
-		if (energy.getEnergyStored() < ENERGY_USE) {
+		if (energy.getEnergyStored() < OreGeneratorConfig.ENERGY_USE.get()) {
 			return false;
 		}
 
@@ -166,7 +160,7 @@ public class OreGeneratorBE extends BlockEntity {
 		for (int i = 0; i < inputItems.getSlots(); i++) {
 			ItemStack item = inputItems.getStackInSlot(i);
 			if (!item.isEmpty()) {
-				energy.removeEnergy(ENERGY_USE);
+				energy.removeEnergy(OreGeneratorConfig.ENERGY_USE.get());
 
 				item = item.copy();  // note: must make a copy as it is illegal to modify the stack in place
 				// see IItemHandler documentation
@@ -175,7 +169,7 @@ public class OreGeneratorBE extends BlockEntity {
 
 				genCounter++;  // to track how many ingots consumed
 				isWorking = true;
-				if (genCounter >= INGOTS_PER_ORE) {
+				if (genCounter >= OreGeneratorConfig.INGOTS_PER_ORE.get()) {
 					genCounter = 0;
 					ItemStack remaining = ItemHandlerHelper.insertItem(outputItems,
 							new ItemStack(generatingBlock.getBlock().asItem()),
@@ -440,7 +434,7 @@ public class OreGeneratorBE extends BlockEntity {
 	}
 
 	public CustomEnergyStorage createEnergy() {
-		return new CustomEnergyStorage(ENERGY_CAP, ENERGY_RECEIVE) {
+		return new CustomEnergyStorage(OreGeneratorConfig.ENERGY_CAP.get(), OreGeneratorConfig.ENERGY_RECEIVE.get()) {
 			@Override
 			protected void onEnergyChanged() {
 				setChanged();
